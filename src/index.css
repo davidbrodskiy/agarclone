@@ -1,28 +1,27 @@
 h1 {
-	color: red;
+  color: red;
 }
 
 body{
-	background-image: url('background.png');
-	background-size: 150px 150px;
+  background-image: url('background.png');
+  background-size: 150px 150px;
 }
 
 .food {
-height: 10px;
-width: 10px;
-background-color: blue;
-position: absolute;
-border-radius: 50%;
-
+  height: 10px;
+  width: 10px;
+  background-color: blue;
+  position: absolute;
+  border-radius: 50%;
 }
 
 .player {
-height: 30px;
-width: 30px;
-background-color: black;
-position: fixed;
-border-radius: 50%;
+	height: 30px;
+	width: 30px;
+	background-color: black;
+	position: fixed;
+	border-radius: 50%;
 
-top: 50%;
-left: 50%;
+	top: 50%;
+	left: 50%;
 }
