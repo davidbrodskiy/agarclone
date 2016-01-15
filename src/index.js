@@ -2,6 +2,12 @@ $(document).ready(function() {
   var colors = ['red', 'purple', 'blue', 'black', 'teal', 'magenta', 'pink', 'orange'];
   var maximum = 400;
 
+    function placeplayer() {
+	  var color = colors[Math.floor(Math.random() * 8)];
+
+      $('body').append($('<div class="player" style="background-color: ' + color + ';"></div>'));
+    }
+
 	function placefood() {
 	  var topcord = Math.random() * $(window).height();
 	  var leftcord = Math.random() * $(window).width();
@@ -13,6 +19,8 @@ $(document).ready(function() {
   //for (var i = 0; i <= 100; i++) {
     //placefood();
   //}
+
+  placeplayer();
 
   window.setInterval(function() {
   	var currentnumber = $('.food').length;
