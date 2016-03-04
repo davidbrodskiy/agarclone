@@ -13,9 +13,9 @@ $(document).ready(function() {
 	  var leftcord = Math.round(Math.random() * $('body').width());
 	  var color = colors[Math.floor(Math.random() * 8)];
    
-   foodarray[topcord][leftcord] = $('<div class="food" style="top: ' + topcord + 'px; left: ' + leftcord + 'px; background-color: ' + color + ';"></div>');
+   foodarray[leftcord][topcord] = $('<div class="food" style="top: ' + topcord + 'px; left: ' + leftcord + 'px; background-color: ' + color + ';"></div>');
 
-    $('body').append(foodarray[topcord][leftcord]);
+    $('body').append(foodarray[leftcord][topcord]);
   }
 
   //for (var i = 0; i <= 100; i++) {
@@ -63,9 +63,9 @@ $(document).ready(function() {
   }
 
   function checkForCollisions(x, y) {
-  	var player = $('.player')[0];
-  	var width = player.width();
-  	var height = player.height();
+  	var player = $('.player');
+  	var width = Math.round(player.width());
+  	var height = Math.round(player.height());
 
   	for (var i = x; i < width + x; i++) {
   		for (var j = y; j < height + y; j++) {
@@ -80,11 +80,15 @@ $(document).ready(function() {
   	var mouseX = event.clientX;
   	var mouseY = event.clientY;
   	speeds = distanceToPlayer(mouseX, mouseY);
-  	checkForCollisions(mouseX, mouseY);
+
+  	var player = $('.player');
+    var playerX = player.offset().left;
+    var playerY = player.offset().top;
+
+  	checkForCollisions(Math.round(playerX), Math.round(playerY));
   });
 
   window.setInterval(function() {
-  	console.log(speeds);
   	$('body').scrollLeft($('body').scrollLeft() + speeds.xSpeed);
   	$('body').scrollTop($('body').scrollTop() + speeds.ySpeed);
   }, 50);
