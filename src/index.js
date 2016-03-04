@@ -9,11 +9,13 @@ $(document).ready(function() {
     }
 
 	function placefood() {
-	  var topcord = Math.random() * $('body').height();
-	  var leftcord = Math.random() * $('body').width();
+	  var topcord = Math.round(Math.random() * $('body').height());
+	  var leftcord = Math.round(Math.random() * $('body').width());
 	  var color = colors[Math.floor(Math.random() * 8)];
+   
+   foodarray[topcord][leftcord] = $('<div class="food" style="top: ' + topcord + 'px; left: ' + leftcord + 'px; background-color: ' + color + ';"></div>');
 
-    $('body').append($('<div class="food" style="top: ' + topcord + 'px; left: ' + leftcord + 'px; background-color: ' + color + ';"></div>'));
+    $('body').append(foodarray[topcord][leftcord]);
   }
 
   //for (var i = 0; i <= 100; i++) {
@@ -22,7 +24,13 @@ $(document).ready(function() {
 
   placeplayer();
 
-  window.setInterval(function() {
+  var foodgrowth = 5;
+  var foodarray = [];
+   for (var i = 0; i < 5000; i++) {
+   	foodarray[i] = [];
+   }
+
+    window.setInterval(function() {
     var currentnumber = $('.food').length;
 
     if (currentnumber<maximum) {
@@ -54,10 +62,25 @@ $(document).ready(function() {
     };
   }
 
+  function checkForCollisions(x, y) {
+  	var player = $('.player')[0];
+  	var width = player.width();
+  	var height = player.height();
+
+  	for (var i = x; i < width + x; i++) {
+  		for (var j = y; j < height + y; j++) {
+  			if (foodarray[i][j]) {
+  				foodarray[i][j].remove();
+  			}
+  		}
+  	}
+  }
+
   $(document).on('mousemove', function(event) {
   	var mouseX = event.clientX;
   	var mouseY = event.clientY;
   	speeds = distanceToPlayer(mouseX, mouseY);
+  	checkForCollisions(mouseX, mouseY);
   });
 
   window.setInterval(function() {
